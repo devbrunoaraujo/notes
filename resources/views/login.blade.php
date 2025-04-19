@@ -1,6 +1,5 @@
 @extends('layouts.main_layout')
-@section('content')
-    
+@section('content')   
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -15,14 +14,23 @@
                 <!-- form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="#" method="post">
+                        <form action="/loginSubmit" method="post" novalidate>
+                            @csrf
                             <div class="mb-3">
                                 <label for="text_username" class="form-label">Username</label>
-                                <input type="text" class="form-control bg-dark text-info" name="text_username" required>
+                                <input type="email" class="form-control bg-dark text-info" name="text_username" value="{{ old('text_username') }}" required>
+                                <!-- Erros -->
+                                @error('text_username')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="text_password" class="form-label">Password</label>
                                 <input type="password" class="form-control bg-dark text-info" name="text_password" required>
+                                <!-- Erros -->
+                                @error('text_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-secondary w-100">LOGIN</button>
