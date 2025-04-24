@@ -72,7 +72,8 @@ class AuthController extends Controller
                 'username' => $user->username
             ]
             ]);
-
-        echo 'Usuário '.$user->username.'Autenticado com sucesso!';
+        
+        //Redirect para home
+        return redirect()->to('/');
     }
 }
