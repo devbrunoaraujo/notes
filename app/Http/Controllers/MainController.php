@@ -20,4 +20,14 @@ class MainController extends Controller
     {
         echo "new note";
     }
+
+    public function editNote($id)
+    {
+        
+    }
+
+    public function deleteNote($id)
+    {
+
+    }
 }
