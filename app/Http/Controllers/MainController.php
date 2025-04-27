@@ -7,14 +7,13 @@ use App\Models\Note;
 use Illuminate\Http\Request;
 use App\Services\Operations;
 
-
 class MainController extends Controller
 {
     public function index()
     {
         //load user and your notes
         $id = session('user.id');
-        $notes = User::find($id)->notes()->get()->toArray();
+        $notes = User::find($id)->notes()->whereNull('deleted_at')->get()->toArray();
 
         return view('home', ['notes' => $notes]);
     }
@@ -115,8 +114,39 @@ class MainController extends Controller
     public function deleteNote($id)
     {
         $id = Operations::decryptID($id);
+
+        $note = Note::find($id);
+        return view('delete_note', [ 'note' => $note ]);
        
         
+    }
+
+    public function deleteNoteConfirm($id)
+    {
+        $id = Operations::decryptID($id);
+       
+        //load note
+        $note = Note::find($id);
+
+        /*hard delete
+        $note->delete();
+        */
+
+        /*soft delete with alter date
+        $note->deleted_at = date('Y-m-d H:i:s');
+        $note->save();
+        */
+        
+        //delete with trait in model SoftDeletes
+        //$note->delete();
+
+        //force delete with trait SofDeletes
+        $note->forceDelete();
+    
+        
+        //redirect to home
+        return redirect()->route('home');
+
     }
 
 }
