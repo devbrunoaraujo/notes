@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/newNote', [MainController::class, 'newNote'])->name('new');
     Route::post('/newNoteSubmit', [MainController::class, 'newNoteSubmit'])->name('newNoteSubmit');
     Route::get('/editNote/{id}', [MainController::class, 'editNote'])->name('edit');
+    Route::post('/editNoteSubmit', [MainController::class, 'editNoteSubmit'])->name('editNoteSubmit');
     Route::get('/deleteNote/{id}', [MainController::class, 'deleteNote'])->name('delete');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
  });

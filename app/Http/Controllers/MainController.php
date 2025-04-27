@@ -64,13 +64,19 @@ class MainController extends Controller
     public function editNote($id)
     {
         $id = Operations::decryptID($id);
-        echo $id;
+       
+        //load note
+        $note = Note::find($id);
+
+        //show view edit note
+        return view('edit_note', ['note' => $note]);
     }
 
     public function deleteNote($id)
     {
         $id = Operations::decryptID($id);
-        echo $id;
+       
+        
     }
 
 }
