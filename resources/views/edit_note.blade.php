@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col">
         @include('top_bar')
-
             <!-- label and cancel -->
             <div class="row">
                 <div class="col">
@@ -21,6 +20,7 @@
             <!-- form -->
             <form action="{{ route('editNoteSubmit') }}" method="post">
                 @csrf
+                <input type="hidden" value="{{ Crypt::encrypt($note->id) }}" name="note_id">
                 <div class="row mt-3">
                     <div class="col">
                         <div class="mb-3">
